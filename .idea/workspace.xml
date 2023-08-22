@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c04ca43-c860-47b3-97f5-78f3332aeb60" name="Changes" comment="setup">
-      <change beforePath="$PROJECT_DIR$/HW1_ArrayLists/src/ArrayList.java" beforeDir="false" afterPath="$PROJECT_DIR$/HW1_ArrayLists/src/ArrayList.java" afterDir="false" />
-    </list>
+    <list default="true" id="0c04ca43-c860-47b3-97f5-78f3332aeb60" name="Changes" comment="setup" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -145,7 +143,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692716872236</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="setup">
+      <option name="closed" value="true" />
+      <created>1692716913249</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1692716913249</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
