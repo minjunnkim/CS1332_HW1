@@ -137,7 +137,7 @@ public class ArrayList<T> {
      * @return true if empty, false otherwise
      */
     public boolean isEmpty() {
-        return false;
+        return true;
     }
 
     /**
