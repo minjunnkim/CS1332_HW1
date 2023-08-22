@@ -5,7 +5,7 @@
  * @version 1.0
  * @userid mkim925
  * @GTID 903873051
- * asdfasdf
+ *
  * Collaborators: LIST ALL COLLABORATORS YOU WORKED WITH HERE
  *
  * Resources: LIST ALL NON-COURSE RESOURCES YOU CONSULTED HERE
