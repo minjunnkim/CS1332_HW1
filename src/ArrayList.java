@@ -30,7 +30,8 @@ public class ArrayList<T> {
      * to cast an Object[] to a T[] to get the generic typing.
      */
     public ArrayList() {
-
+        backingArray = (T[]) new Object[INITIAL_CAPACITY];
+        size = 0;
     }
 
     /**
@@ -46,7 +47,26 @@ public class ArrayList<T> {
      * @throws IllegalArgumentException  if data is null
      */
     public void addAtIndex(int index, T data) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index is out of bounds");
+        }
+        if (data == null) {
+            throw new IllegalArgumentException("Data cannot be null");
+        }
 
+        if (size == backingArray.length) {
+            int newCapacity = backingArray.length * 2;
+            T[] newBackingArray = (T[]) new Object[newCapacity];
+            System.arraycopy(backingArray, 0, newBackingArray, 0, size);
+            backingArray = newBackingArray;
+        }
+
+        for (int i = size; i > index; i--) {
+            backingArray[i] = backingArray[i - 1];
+        }
+
+        backingArray[index] = data;
+        size++;
     }
 
     /**
