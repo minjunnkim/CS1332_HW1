@@ -87,7 +87,7 @@ public class ArrayList<T> {
      * @throws IndexOutOfBoundsException if index < 0 or index >= size
      */
     public T removeAtIndex(int index) {
-
+        return null;
     }
 
     /**
@@ -101,7 +101,7 @@ public class ArrayList<T> {
      * @throws java.util.NoSuchElementException if the list is empty
      */
     public T removeFromFront() {
-
+        return null;
     }
 
     /**
@@ -113,7 +113,7 @@ public class ArrayList<T> {
      * @throws java.util.NoSuchElementException if the list is empty
      */
     public T removeFromBack() {
-
+        return null;
     }
 
     /**
@@ -126,7 +126,7 @@ public class ArrayList<T> {
      * @throws IndexOutOfBoundsException if index < 0 or index >= size
      */
     public T get(int index) {
-
+        return null;
     }
 
     /**
@@ -137,7 +137,7 @@ public class ArrayList<T> {
      * @return true if empty, false otherwise
      */
     public boolean isEmpty() {
-
+        return false;
     }
 
     /**
