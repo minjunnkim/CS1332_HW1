@@ -47,22 +47,15 @@ public class ArrayList<T> {
      * @throws IllegalArgumentException  if data is null
      */
     public void addAtIndex(int index, T data) {
-        if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("Index is out of bounds");
-        }
-        if (data == null) {
-            throw new IllegalArgumentException("Data cannot be null");
-        }
+        indexOOBAdd(index);
+        illegalArg(data);
 
         if (size == backingArray.length) {
-            int newCapacity = backingArray.length * 2;
-            T[] newBackingArray = (T[]) new Object[newCapacity];
-            System.arraycopy(backingArray, 0, newBackingArray, 0, size);
-            backingArray = newBackingArray;
+            redoBackingArray();
         }
 
         for (int i = size; i > index; i--) {
-            backingArray[i] = backingArray[i - 1];
+            backingArray[i] = backingArray[i-1];
         }
 
         backingArray[index] = data;
@@ -80,7 +73,7 @@ public class ArrayList<T> {
      * @throws IllegalArgumentException if data is null
      */
     public void addToFront(T data) {
-
+        addAtIndex(0,data);
     }
 
     /**
@@ -92,7 +85,14 @@ public class ArrayList<T> {
      * @throws IllegalArgumentException if data is null
      */
     public void addToBack(T data) {
+        illegalArg(data);
 
+        if (size == backingArray.length) {
+            redoBackingArray();
+        }
+
+        backingArray[size] = data;
+        size++;
     }
 
     /**
@@ -107,7 +107,18 @@ public class ArrayList<T> {
      * @throws IndexOutOfBoundsException if index < 0 or index >= size
      */
     public T removeAtIndex(int index) {
-        return null;
+        indexOOB(index);
+
+        T removedData = get(index);
+
+        for (int i = index; i < size - 1; i++) {
+            backingArray[i] = backingArray[i + 1];
+        }
+
+        backingArray[size - 1] = null;
+        size--;
+
+        return removedData;
     }
 
     /**
@@ -121,7 +132,9 @@ public class ArrayList<T> {
      * @throws java.util.NoSuchElementException if the list is empty
      */
     public T removeFromFront() {
-        return null;
+        noSE();
+
+        return removeAtIndex(0);
     }
 
     /**
@@ -133,7 +146,13 @@ public class ArrayList<T> {
      * @throws java.util.NoSuchElementException if the list is empty
      */
     public T removeFromBack() {
-        return null;
+        noSE();
+
+        T removedData = get(size - 1);
+        backingArray[size - 1] = null;
+        size--;
+
+        return removedData;
     }
 
     /**
@@ -146,7 +165,9 @@ public class ArrayList<T> {
      * @throws IndexOutOfBoundsException if index < 0 or index >= size
      */
     public T get(int index) {
-        return null;
+        indexOOB(index);
+
+        return backingArray[index];
     }
 
     /**
@@ -157,7 +178,7 @@ public class ArrayList<T> {
      * @return true if empty, false otherwise
      */
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     /**
@@ -169,7 +190,8 @@ public class ArrayList<T> {
      * Must be O(1).
      */
     public void clear() {
-
+        backingArray = (T[]) new Object[INITIAL_CAPACITY];
+        size = 0;
     }
 
     /**
@@ -197,4 +219,41 @@ public class ArrayList<T> {
         // DO NOT MODIFY THIS METHOD!
         return size;
     }
+
+    /**
+     * Private Helper Methods
+     */
+    private void indexOOB(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index must be within the ArrayList's bounds.");
+        }
+    }
+
+    private void indexOOBAdd(int index) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index must be within the ArrayList's bounds.");
+        }
+    }
+
+    private void illegalArg(T data) {
+        if (data == null) {
+            throw new IllegalArgumentException("Cannot insert null data into data structure.");
+        }
+    }
+
+    private void noSE() {
+        if (isEmpty()) {
+            throw new java.util.NoSuchElementException("List is empty");
+        }
+    }
+
+    private void redoBackingArray() {
+        int newCapacity = backingArray.length * 2;
+        Object[] newBackingArray = new Object[newCapacity];
+        for (int i = 0; i < size; i++) {
+            newBackingArray[i] = backingArray[i];
+        }
+        backingArray = (T[]) newBackingArray;
+    }
+
 }
