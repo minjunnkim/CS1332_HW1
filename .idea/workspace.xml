@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c04ca43-c860-47b3-97f5-78f3332aeb60" name="Changes" comment="setup" />
+    <list default="true" id="0c04ca43-c860-47b3-97f5-78f3332aeb60" name="Changes" comment="setup">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CS1332/ArrayList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CS1332/ArrayListStudentTest.class" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -95,6 +99,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ArrayListStudentTest" />
+        <item itemvalue="JUnit.ArrayListStudentTest" />
+        <item itemvalue="JUnit.ArrayListStudentTest" />
+        <item itemvalue="JUnit.ArrayListStudentTest" />
         <item itemvalue="JUnit.ArrayListStudentTest" />
       </list>
     </recent_temporary>
@@ -196,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692750126166</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="setup">
+      <option name="closed" value="true" />
+      <created>1692750345732</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1692750345732</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
