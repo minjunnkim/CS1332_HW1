@@ -31,6 +31,8 @@ public class ArrayList<T> {
      */
     public ArrayList() {
         backingArray = (T[]) new Object[INITIAL_CAPACITY];
+
+        //Size starts as 0 as no data is in the newly made ArrayList.
         size = 0;
     }
 
@@ -47,18 +49,30 @@ public class ArrayList<T> {
      * @throws IllegalArgumentException  if data is null
      */
     public void addAtIndex(int index, T data) {
-        indexOOBAdd(index);
+        //Index out of bounds check.
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index must be within the ArrayList's bounds (0~size)");
+        }
+        //Illegal Argument check.
         illegalArg(data);
 
+        //Redo the backing array if the backing array runs out of space.
         if (size == backingArray.length) {
             redoBackingArray();
         }
 
-        for (int i = size; i > index; i--) {
-            backingArray[i] = backingArray[i-1];
+        //For when index is not size.
+        if (index != size) {
+            //Shift one index forward for all values from the end until before the index.
+            for (int i = size; i > index; i--) {
+                backingArray[i] = backingArray[i - 1];
+            }
         }
 
+        //Input new data in the desired index.
         backingArray[index] = data;
+
+        //Increase size by one to accommodate for the new data.
         size++;
     }
 
@@ -73,6 +87,10 @@ public class ArrayList<T> {
      * @throws IllegalArgumentException if data is null
      */
     public void addToFront(T data) {
+        //Illegal Argument check.
+        illegalArg(data);
+
+        //Simply use the already-written addAtIndex() method.
         addAtIndex(0,data);
     }
 
@@ -85,14 +103,11 @@ public class ArrayList<T> {
      * @throws IllegalArgumentException if data is null
      */
     public void addToBack(T data) {
+        //Illegal Argument check.
         illegalArg(data);
 
-        if (size == backingArray.length) {
-            redoBackingArray();
-        }
-
-        backingArray[size] = data;
-        size++;
+        //Simply use the already-written addAtIndex() method.
+        addAtIndex(size, data);
     }
 
     /**
@@ -107,17 +122,27 @@ public class ArrayList<T> {
      * @throws IndexOutOfBoundsException if index < 0 or index >= size
      */
     public T removeAtIndex(int index) {
+        //Index out of bounds check.
         indexOOB(index);
 
+        //Save the data that will be removed for output later in the method.
         T removedData = get(index);
 
-        for (int i = index; i < size - 1; i++) {
-            backingArray[i] = backingArray[i + 1];
+        //For when index is not size - 1.
+        if (index != size-1) {
+            //Shift the relevant data backwards by one index.
+            for (int i = index; i < size - 1; i++) {
+                backingArray[i] = backingArray[i + 1];
+            }
         }
 
+        //Set the removed index to null.
         backingArray[size - 1] = null;
+
+        //Decrease size to accommodate for the removed data.
         size--;
 
+        //Return the data formerly located at the index.
         return removedData;
     }
 
@@ -132,8 +157,10 @@ public class ArrayList<T> {
      * @throws java.util.NoSuchElementException if the list is empty
      */
     public T removeFromFront() {
+        //No Such Element check.
         noSE();
 
+        //Simply use the already written removeAtIndex() method.
         return removeAtIndex(0);
     }
 
@@ -146,13 +173,11 @@ public class ArrayList<T> {
      * @throws java.util.NoSuchElementException if the list is empty
      */
     public T removeFromBack() {
+        //No Such Element check.
         noSE();
 
-        T removedData = get(size - 1);
-        backingArray[size - 1] = null;
-        size--;
-
-        return removedData;
+        //Simply use the already written removeAtIndex() method.
+        return removeAtIndex(size-1);
     }
 
     /**
@@ -165,8 +190,10 @@ public class ArrayList<T> {
      * @throws IndexOutOfBoundsException if index < 0 or index >= size
      */
     public T get(int index) {
+        //Index out of bounds check.
         indexOOB(index);
 
+        //Get the value from the backing array.
         return backingArray[index];
     }
 
@@ -178,6 +205,7 @@ public class ArrayList<T> {
      * @return true if empty, false otherwise
      */
     public boolean isEmpty() {
+        //Check and return
         return size == 0;
     }
 
@@ -190,6 +218,7 @@ public class ArrayList<T> {
      * Must be O(1).
      */
     public void clear() {
+        //Reset backing array & size.
         backingArray = (T[]) new Object[INITIAL_CAPACITY];
         size = 0;
     }
@@ -223,37 +252,45 @@ public class ArrayList<T> {
     /**
      * Private Helper Methods
      */
+
+    //Index Out of Bounds Exception
     private void indexOOB(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index must be within the ArrayList's bounds.");
         }
     }
 
-    private void indexOOBAdd(int index) {
-        if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("Index must be within the ArrayList's bounds.");
-        }
-    }
-
+    //Illegal Argument Exception
     private void illegalArg(T data) {
         if (data == null) {
             throw new IllegalArgumentException("Cannot insert null data into data structure.");
         }
     }
 
+    //No Such Element Exception
     private void noSE() {
         if (isEmpty()) {
             throw new java.util.NoSuchElementException("List is empty");
         }
     }
 
+    //Extend/update the backing array
     private void redoBackingArray() {
         int newCapacity = backingArray.length * 2;
-        Object[] newBackingArray = new Object[newCapacity];
+        T[] newBackingArray = (T[]) new Object[newCapacity];
+
+        // Manual arraycopy
         for (int i = 0; i < size; i++) {
             newBackingArray[i] = backingArray[i];
         }
-        backingArray = (T[]) newBackingArray;
+
+        // Set all unused positions in the new backing array to null
+        for (int i = size; i < newBackingArray.length; i++) {
+            newBackingArray[i] = null;
+        }
+
+        backingArray = newBackingArray;
+
     }
 
 }
